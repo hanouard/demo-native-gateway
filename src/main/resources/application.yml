@@ -1,0 +1,20 @@
+server:
+  port: 8060
+
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5s
+      routes:
+        - id: test_route
+          uri: https://jsonplaceholder.typicode.com/posts
+          predicates:
+            - Path=/test/**
+          filters:
+            - StripPrefix=1
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
